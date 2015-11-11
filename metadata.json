@@ -1,0 +1,33 @@
+{
+  "name": "pmovil-elastic_filebeat",
+  "version": "0.1.0",
+  "author": "Ivan Stoiev <ivan.stoiev@gmail.com>",
+  "summary": "Elastic filebeat installation/configuration",
+  "license": "MIT License",
+  "source": "git@github.com:Pmovil/puppet-elastic_filebeat.git",
+  "project_page": "https://github.com/Pmovil/puppet-elastic_filebeat",
+  "issues_url": "https://github.com/Pmovil/puppet-elastic_filebeat",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ]
+}
