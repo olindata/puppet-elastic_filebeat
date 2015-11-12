@@ -6,9 +6,7 @@ define elastic_filebeat::prospector (
   $paths                     = [],
   $input_type                = 'log',
   $encoding                  = undef,
-  $fields                    = {
-  }
-  ,
+  $fields                    = {},
   $fields_under_root         = undef,
   $ignore_older              = undef,
   $document_type             = undef,
