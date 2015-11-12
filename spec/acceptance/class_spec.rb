@@ -13,11 +13,11 @@ describe 'elastic_filebeat class' do
       apply_manifest(pp, :catch_changes  => true)
     end
 
-    describe package('elastic_filebeat') do
+    describe package('filebeat') do
       it { is_expected.to be_installed }
     end
 
-    describe service('elastic_filebeat') do
+    describe service('filebeat') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end

@@ -16,8 +16,8 @@ describe 'elastic_filebeat' do
           it { is_expected.to contain_class('elastic_filebeat::config') }
           it { is_expected.to contain_class('elastic_filebeat::service').that_subscribes_to('elastic_filebeat::config') }
 
-          it { is_expected.to contain_service('elastic_filebeat') }
-          it { is_expected.to contain_package('elastic_filebeat').with_ensure('present') }
+          it { is_expected.to contain_service('filebeat') }
+          it { is_expected.to contain_package('filebeat').with_ensure('present') }
         end
       end
     end
@@ -32,7 +32,7 @@ describe 'elastic_filebeat' do
         }
       end
 
-      it { expect { is_expected.to contain_package('elastic_filebeat') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
+      it { expect { is_expected.to contain_package('filebeat') }.to raise_error(Puppet::Error, /Nexenta not supported/) }
     end
   end
 end

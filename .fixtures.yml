@@ -2,4 +2,4 @@ fixtures:
   repositories:
     stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
   symlinks:
-    <%= metadata.name %>: "#{source_dir}"
+    elastic_filebeat: "#{source_dir}"

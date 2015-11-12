@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Ivan Stoiev <ivan.stoiev@gmail.com>",
   "summary": "Elastic filebeat installation/configuration",
-  "license": "MIT License",
+  "license": "MIT",
   "source": "git@github.com:Pmovil/puppet-elastic_filebeat.git",
   "project_page": "https://github.com/Pmovil/puppet-elastic_filebeat",
   "issues_url": "https://github.com/Pmovil/puppet-elastic_filebeat",
@@ -18,7 +18,8 @@
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {

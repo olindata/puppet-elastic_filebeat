@@ -2,9 +2,7 @@
 #
 # This class is called from elastic_filebeat for service config.
 #
-class elastic_filebeat::config (
-){
-
+class elastic_filebeat::config () {
   $confd_dir = $::elastic_filebeat::params::confd_dir
   $logstash_output_enabled = $::elastic_filebeat::logstash_output_enabled
   $logstash_output_hosts = $::elastic_filebeat::logstash_output_hosts
@@ -19,25 +17,19 @@ class elastic_filebeat::config (
   $log_rotateeverybytes = $elastic_filebeat::log_rotateeverybytes
   $log_level = $elastic_filebeat::log_level
 
-  
-  file{$::elastic_filebeat::params::conf_dir:
-    ensure => 'directory'
+  file { $::elastic_filebeat::params::conf_dir: ensure => 'directory' }
+
+  file { $::elastic_filebeat::params::confd_dir:
+    ensure  => 'directory',
+    purge   => true,
+    recurse => true,
   }
 
-  file{$::elastic_filebeat::params::confd_dir:
-    ensure => 'directory',
-    purge => true,
-    recurse => true
-  }
-   
-  
-  file{$::elastic_filebeat::params::conf_file:
-    ensure => 'file',
+  file { $::elastic_filebeat::params::conf_file:
+    ensure  => 'file',
     content => template('elastic_filebeat/filebeat.yml.erb'),
     require => File[$::elastic_filebeat::params::confd_dir],
     notify  => Service[$::elastic_filebeat::params::service_name],
   }
-  
-  
-  
+
 }
