@@ -46,11 +46,11 @@ class elastic_filebeat (
   } else {
     $real_package_provider = $::elastic_filebeat::params::default_package_provider
   }
-  
 
   class { '::elastic_filebeat::install': } ->
   class { '::elastic_filebeat::config': } ~>
   class { '::elastic_filebeat::service': } ->
   Class['::elastic_filebeat']
+  
 
 }

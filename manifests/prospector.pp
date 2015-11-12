@@ -18,6 +18,9 @@ define elastic_filebeat::prospector (
   $backoff_factor            = undef,
   $partial_line_waiting      = undef,
   $force_close_windows_files = undef) {
+  
+  include '::elastic_filebeat'
+    
   if ($fields_under_root != undef) {
     validate_bool($fields_under_root)
   }
@@ -45,8 +48,7 @@ define elastic_filebeat::prospector (
   file { "${::elastic_filebeat::params::confd_dir}/${name}.yml":
     ensure  => 'file',
     content => template('elastic_filebeat/prospector.yml.erb'),
-    require => [Package[$::elastic_filebeat::params::package_name], File[$elastic_filebeat::params::confd_dir]],
-    notify  => Service[$::elastic_filebeat::params::service_name],
+    notify  => Class['::elastic_filebeat::service'],
   }
 
 }
