@@ -13,7 +13,6 @@
 class elastic_filebeat (
   $package_file                = '',
   $package_provider            = '',
-  $prospectors                 = {},
   $logstash_output_enabled     = false,
   $logstash_output_hosts       = ['localhost:5044'],
   $logstash_output_loadbalance = undef,
@@ -48,10 +47,6 @@ class elastic_filebeat (
     $real_package_provider = $::elastic_filebeat::params::default_package_provider
   }
   
-  validate_hash($prospectors)
-  if($prospectors){
-    create_resources('elastic_filebeat::prospector', $prospectors)
-  }
 
   class { '::elastic_filebeat::install': } ->
   class { '::elastic_filebeat::config': } ~>
