@@ -35,17 +35,19 @@ class elastic_filebeat (
   if($package_file != ''){
     $real_package_file = $package_file
   } else {
+    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '14') <= 0){
+        fail('Actual filebeat RPM is not compatible with old RPM systems needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes on version and supply package_file')
+    }    
     $real_package_file = $::elastic_filebeat::params::default_package_file
   }
 
   if($package_provider != ''){
     $real_package_provider = $package_provider
   } else {
-    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '14') <= 0){
-        fail('Actual filebeat RPM is not compatible with old RPM systems needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes on version and supply package_file')
-    }
     $real_package_provider = $::elastic_filebeat::params::default_package_provider
   }
+  
+  
 
   class { '::elastic_filebeat::install': } ->
   class { '::elastic_filebeat::config': } ~>
