@@ -8,71 +8,77 @@
     * [Beginning with elastic_filebeat](#beginning-with-elastic_filebeat)
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+    * [Classes](#classes)
+    * [Defined Types](#defined-types)
+    * [Templates](#templates)
 
-## Overview
 
-Installs and configures elastic filebeat       
+##Overview
 
-## Module Description
+Install and configure Elasticsearch [filebeat](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html)
 
-TODO:
+##Module Description
 
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
+This puppet module installs filebeat official RPM from Elasticsearch with a fixed version (1.0.0-rc1 at the moment, waiting for filebeat release to implement other approach)
 
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
+Actually only works with logstash output and without security, but it's easily expandable 
 
-## Setup
+##Setup
 
-### What elastic_filebeat affects
+###What elastic_filebeat affects
 
-TODO:
+* Manage filebeat package, service and configuration
+* Monopolizes /etc/filebeat/filebeat.yml file and /etc/filebeat/conf.d directory
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
+###Beginning with elastic_filebeat
 
-### Setup Requirements **OPTIONAL**
+puppet module install pmovil-elastic_filebeat
 
-TODO:
+##Usage
 
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
+```puppet
+    class {'elastic_filebeat':
+        logstash_output_enabled: true
+    }
+    
+    elastic_filebeat::prospector{'system_logs':
+        paths: ['/var/log/*'],
+    }
+```
 
-### Beginning with elastic_filebeat
+##Reference
 
-TODO:
+###Classes
+####`elastic_filebeat`
+#####`package_file`
+#####`package_provider`
+#####`logstash_output_enabled`
+#####`logstash_output_hosts`
+#####`logstash_output_loadbalance`
+#####`logstash_output_index`
+#####`self_log_to_syslog`
+#####`self_log_to_files`
+#####`self_log_selectors`
+#####`self_log_level`
+#####`self_log_path`
+#####`self_log_name`
+#####`self_log_rotateeverybytes`
+#####`self_log_keepfiles`
 
-The very basic steps needed for a user to get the module up and running. 
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
-
-## Usage
-
-TODO:
-
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
-
-## Reference
-
-TODO:
-
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
-
-## Limitations
-
-TODO:
-
-This is where you list OS compatibility, version compatibility, etc.
-
-## Development
-
-TODO:
-
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-TODO:
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+###Defined Types
+####`elastic_filebeat::prospector`
+#####`paths`
+#####`input_type`
+#####`encoding`
+#####`fields`
+#####`fields_under_root`
+#####`ignore_older`
+#####`document_type`
+#####`scan_frequency`
+#####`harvester_buffer_size`
+#####`tail_files`
+#####`backoff`
+#####`max_backoff`
+#####`backoff_factor`
+#####`partial_line_waiting`
+#####`force_close_windows_files`
