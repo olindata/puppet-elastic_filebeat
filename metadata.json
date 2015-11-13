@@ -1,6 +1,6 @@
 {
   "name": "pmovil-elastic_filebeat",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Ivan Stoiev <ivan.stoiev@gmail.com>",
   "summary": "Elastic filebeat installation/configuration",
   "license": "MIT",
