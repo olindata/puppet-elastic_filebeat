@@ -35,8 +35,8 @@ class elastic_filebeat (
   if($package_file != ''){
     $real_package_file = $package_file
   } else {
-    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '14') <= 0){
-        fail('Actual filebeat RPM is not compatible with old RPM systems needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes on version and supply package_file')
+    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '17') <= 0){
+        fail('Actual filebeat RPM is not compatible with old RPM systems that needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes and supply package_file')
     }
     $real_package_file = $::elastic_filebeat::params::default_package_file
   }
