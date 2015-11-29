@@ -11,6 +11,7 @@ filebeat:
       # /var/log/*/*.log can be used.
       # For each file found under this path, a harvester is started.
       # Make sure not file is defined twice as this can lead to unexpected behaviour.
+      
       paths:
         <% @paths.each do |path| %>
         - <%= path%>
@@ -39,10 +40,12 @@ filebeat:
       #fields:
       #  level: debug
       #  review: 1
-
+      
+      <% unless @fields.nil? %>
       fields:
       <% @fields.each_pair do |key, val| %>
         <%= key %>:<%= val %>
+      <% end %>
       <% end %>
       
       # Set to true to store the additional fields as top level fields instead

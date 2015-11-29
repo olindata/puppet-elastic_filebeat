@@ -11,12 +11,17 @@
 #   e.g. "Specify one or more upstream ntp servers as an array."
 #
 class elastic_filebeat (
-  $package_file                = '',
-  $package_provider            = '',
-  $logstash_output_enabled     = false,
-  $logstash_output_hosts       = ['localhost:5044'],
-  $logstash_output_loadbalance = undef,
-  $logstash_output_index       = undef,
+  $elasticsearch_output_enabled     = false,
+  $elasticsearch_output_hosts       = ['localhost:5044'],
+  $elasticsearch_output_loadbalance = undef,
+  $elasticsearch_output_index       = undef,
+  $package_file               	    = '',
+  $package_provider                 = '',
+  $logstash_output_enabled          = false,
+  $logstash_output_hosts            = ['localhost:5044'],
+  $logstash_output_loadbalance      = undef,
+  $logstash_output_index            = undef,
+  $output                           = [], 
   $self_log_to_syslog               = undef,
   $self_log_to_files                = undef,
   $self_log_selectors               = [],
@@ -35,8 +40,8 @@ class elastic_filebeat (
   if($package_file != ''){
     $real_package_file = $package_file
   } else {
-    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '17') <= 0){
-        fail('Actual filebeat RPM is not compatible with old RPM systems that needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes and supply package_file')
+    if($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '14') <= 0){
+        fail('Actual filebeat RPM is not compatible with old RPM systems needs rpmlib(TildeInVersions). You need to regenerate RPM without tildes on version and supply package_file')
     }
     $real_package_file = $::elastic_filebeat::params::default_package_file
   }

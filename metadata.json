@@ -7,12 +7,6 @@
   "source": "git@github.com:Pmovil/puppet-elastic_filebeat.git",
   "project_page": "https://github.com/Pmovil/puppet-elastic_filebeat",
   "issues_url": "https://github.com/Pmovil/puppet-elastic_filebeat",
-  "dependencies": [
-    {
-      "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 1.0.0"
-    }
-  ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
@@ -45,6 +39,9 @@
         "14"
       ]
     }
-    
+  ],
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
+    {"name":"puppetlabs-concat","version_requirement":">= 1.2.4"}
   ]
 }

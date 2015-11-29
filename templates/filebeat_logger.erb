@@ -1,0 +1,46 @@
+############################# Logging #########################################
+
+logging:
+  # Send all logging output to syslog. On Windows default is false, otherwise
+  # default is true.
+  #to_syslog: true
+  <% unless @self_log_to_syslog.nil? %>to_syslog: <%= @self_log_to_syslog%><% end %>
+
+  # Write all logging output to files. Beats automatically rotate files if configurable
+  # limit is reached.
+  #to_files: false
+  <% unless @self_log_to_files.nil? %>to_files: <%= @self_log_to_files%><% end %>
+
+  # Enable debug output for selected components.
+  #selectors: []
+  <% unless @self_log_selectors.nil? %>
+  <% @self_log_selectors.each do |selector| %>
+  - <%= selector%>
+  <% end %>
+  <% end %>
+
+  # Set log level
+  #level: error
+  <% unless @self_log_level.nil? %>level: <%= @self_log_level%><% end %>
+  
+
+  #files:
+    # The directory where the log files will written to.
+    #path: /var/log/mybeat
+    <% unless @self_log_path.nil? %>path: <%= @self_log_path%><% end %>
+    
+
+    # The name of the files where the logs are written to.
+    #name: mybeat
+    <% unless @self_log_name.nil? %>name: <%= @self_log_name%><% end %>
+    
+
+    # Configure log file size limit. If limit is reached, log file will be
+    # automatically rotated
+    #rotateeverybytes: 10485760 # = 10MB
+    <% unless @self_log_rotateeverybytes.nil? %>rotateeverybytes: <%= @self_log_rotateeverybytes%><% end %>
+    
+
+    # Number of rotated log files to keep. Oldest files will be deleted first.
+    #keepfiles: 7
+    <% unless @self_log_keepfiles.nil? %>keepfiles: <%= @self_log_keepfiles%><% end %>
