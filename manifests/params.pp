@@ -4,7 +4,7 @@
 # It sets variables according to platform.
 #
 class elastic_filebeat::params {
-    
+  
   $package_name = 'filebeat'
   $service_name = 'filebeat'
   $conf_dir = '/etc/filebeat'

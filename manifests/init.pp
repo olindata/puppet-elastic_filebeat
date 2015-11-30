@@ -15,6 +15,7 @@ class elastic_filebeat (
   $elasticsearch_output_hosts       = ['localhost:5044'],
   $elasticsearch_output_loadbalance = undef,
   $elasticsearch_output_index       = undef,
+  $paths                            = [],
   $package_file               	    = '',
   $package_provider                 = '',
   $logstash_output_enabled          = false,
