@@ -1,14 +1,15 @@
 
   logstash:
     # Uncomment out this option if you want to output to Logstash. The default is false.
-    #enabled: true
-    <% unless @logstash_output_enabled.nil? %>enabled: <%= @logstash_output_enabled%><% end %>
+    enabled: true
   
     # The Logstash hosts
     #hosts: ["localhost:5044"]
     hosts:
+      <% unless @logstash_output_hosts.nil? %>
       <% @logstash_output_hosts.each do |host| %>
       - <%= host%>
+      <% end %>
       <% end %>
   
   

@@ -1,8 +1,7 @@
 
   elasticsearch:
     # Uncomment out this option if you want to output to Logstash. The default is false.
-    #enabled: true
-    <% unless @elasticsearch_output_enabled.nil? %>enabled: <%= @elasticsearch_output_enabled%><% end %>
+    enabled: true
  
     # The elasticsearch hosts
     #hosts: ["localhost:5044"]
