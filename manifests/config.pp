@@ -80,7 +80,6 @@ concat::fragment { 'filebeat_prospector':
   target  => $::elastic_filebeat::params::conf_file,
   content => template('elastic_filebeat/filebeat_prospector.erb'),
   order   => '06'
-#  notify  => Class['::elastic_filebeat::service'], 
 }
 
 }
