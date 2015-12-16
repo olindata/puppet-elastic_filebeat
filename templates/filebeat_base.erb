@@ -1,5 +1,3 @@
-################### Filebeat Configuration Example #########################
-
 ############################# Filebeat ######################################
 filebeat:
 
@@ -22,10 +20,3 @@ filebeat:
   # the prospector part is processed. All global options like spool_size are ignored.
   # The config_dir MUST point to a different directory then where the main filebeat config file is in.
   config_dir: <%= @confd_dir %>
-
-
-############################# Output ##########################################
-
-# Configure what outputs to use when sending the data collected by filebeat.
-# You can enable one or multiple outputs by setting enabled option to true.
-output:

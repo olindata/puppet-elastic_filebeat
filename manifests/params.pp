@@ -12,7 +12,7 @@ class elastic_filebeat::params {
   $confd_dir = "${conf_dir}/conf.d"
 
   case $::osfamily {
-    'Debian'           : {
+    'Debian' : {
       if ($::architecture == 'amd64') {
         $default_package_file = 'https://download.elastic.co/beats/filebeat/filebeat_1.0.0-rc1_amd64.deb'
       } else {

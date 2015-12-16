@@ -30,7 +30,8 @@ class elastic_filebeat (
   $self_log_path                    = undef,
   $self_log_name                    = undef,
   $self_log_rotateeverybytes        = undef,
-  $self_log_keepfiles               = undef) inherits ::elastic_filebeat::params {
+  $self_log_keepfiles               = undef
+) inherits ::elastic_filebeat::params {
     
   if ($logstash_output_loadbalance != undef) {
     validate_bool($logstash_output_loadbalance)

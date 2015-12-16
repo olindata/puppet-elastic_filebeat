@@ -4,7 +4,7 @@
 #
 class elastic_filebeat::config {
 
-include stdlib
+  include stdlib
 
   $elasticsearch_output_enabled     = $elastic_filebeat::elasticsearch_output_enabled
   $elasticsearch_output_hosts       = $elastic_filebeat::elasticsearch_output_hosts
@@ -27,59 +27,63 @@ include stdlib
   $paths                            = $elastic_filebeat::paths
   $input_type                       = 'log'
 
+  concat { $::elastic_filebeat::params::conf_file:
+    ensure => present,
+  }
 
+  concat::fragment { 'filebeat_header':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_header.erb'),
+    order   => '00'
+  }
 
-concat { $::elastic_filebeat::params::conf_file:
-  ensure => present,
-}
+  concat::fragment { 'filebeat_base':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_base.erb'),
+    order   => '01'
+  }
 
-concat::fragment { 'filebeat_base':
-  target  => $::elastic_filebeat::params::conf_file,
-  content => template('elastic_filebeat/filebeat_base.erb'),
-  order   => '01'
-}
+  concat::fragment { 'filebeat_prospector':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_prospector.erb'),
+    order   => '02'
+  }
 
-if is_array($::elastic_filebeat::output){
+  concat::fragment { 'filebeat_output':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_output.erb'),
+    order   => '03'
+  }
 
-    if 'elasticsearch' in $::elastic_filebeat::output{
-
-	concat::fragment { 'filebeat_output_elasticsearch':
-	  target  => $::elastic_filebeat::params::conf_file,
-  	  content => template('elastic_filebeat/filebeat_output_elasticsearch.erb'),
-  	  order   => '02'
-	}
-
+  if is_array($::elastic_filebeat::output) {
+    if 'elasticsearch' in $::elastic_filebeat::output {
+      concat::fragment { 'filebeat_output_elasticsearch':
+        target  => $::elastic_filebeat::params::conf_file,
+        content => template('elastic_filebeat/filebeat_output_elasticsearch.erb'),
+        order   => '04'
+      }
     }
-
-    if 'logstash' in $::elastic_filebeat::output{
-
-         concat::fragment { 'filebeat_output_logstash':
-          target  => $::elastic_filebeat::params::conf_file,
-          content => template('elastic_filebeat/filebeat_output_logstash.erb'),
-          order   => '03'
-        }
+    if 'logstash' in $::elastic_filebeat::output {
+      concat::fragment { 'filebeat_output_logstash':
+        target  => $::elastic_filebeat::params::conf_file,
+        content => template('elastic_filebeat/filebeat_output_logstash.erb'),
+        order   => '05'
+      }
     }   
-}else{
-notify {"Not a valid value type of paramtere output, value for parameter output must be in array format":}
-}
+  } else {
+    notify {"Not a valid value type of paramtere output, value for parameter output must be in array format":}
+  }
 
+  concat::fragment { 'filebeat_shipper':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_shipper.erb'),
+    order   => '06'
+  }
 
-concat::fragment { 'filebeat_shipper':
-  target  => $::elastic_filebeat::params::conf_file,
-  content => template('elastic_filebeat/filebeat_shipper.erb'),
-  order   => '04'
-}
-
-concat::fragment { 'filebeat_logger':
-  target  => $::elastic_filebeat::params::conf_file,
-  content => template('elastic_filebeat/filebeat_logger.erb'),
-  order   => '05'
-}
-
-concat::fragment { 'filebeat_prospector':
-  target  => $::elastic_filebeat::params::conf_file,
-  content => template('elastic_filebeat/filebeat_prospector.erb'),
-  order   => '06'
-}
+  concat::fragment { 'filebeat_logger':
+    target  => $::elastic_filebeat::params::conf_file,
+    content => template('elastic_filebeat/filebeat_logger.erb'),
+    order   => '07'
+  }
 
 }
