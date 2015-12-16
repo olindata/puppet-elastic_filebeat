@@ -6,11 +6,11 @@
     # The Logstash hosts
     #hosts: ["localhost:5044"]
     hosts:
-      <% unless @logstash_output_hosts.nil? %>
-      <% @logstash_output_hosts.each do |host| %>
+      <% unless @logstash_output_hosts.nil? -%>
+      <% @logstash_output_hosts.each do |host| -%>
       - <%= host%>
-      <% end %>
-      <% end %>
+      <% end -%>
+      <% end -%>
   
   
     # Optional load balance the events between the Logstash hosts

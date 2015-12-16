@@ -9,9 +9,9 @@
       # Make sure not file is defined twice as this can lead to unexpected behaviour.
       
       paths:
-        <% @paths.each do |path| %>
+        <% @paths.each do |path| -%>
         - <%= path%>
-        <% end %>
+        <% end -%>
 
       # Configure the file encoding for reading files with international characters
       # following the W3C recommendation for HTML5 (http://www.w3.org/TR/encoding).
@@ -37,12 +37,12 @@
       #  level: debug
       #  review: 1
       
-      <% unless @fields.nil? %>
+      <% unless @fields.nil? -%>
       fields:
-      <% @fields.each_pair do |key, val| %>
+      <% @fields.each_pair do |key, val| -%>
         <%= key %>:<%= val %>
-      <% end %>
-      <% end %>
+      <% end -%>
+      <% end -%>
       
       # Set to true to store the additional fields as top level fields instead
       # of under the "fields" sub-dictionary. In case of name conflicts with the
@@ -50,21 +50,17 @@
       # fields.
       #fields_under_root: false
       <% if @fields_under_root %>fields_under_root: <%= @fields_under_root%><% end %> 
-      
-      
+            
       # Ignore files which were modified more then the defined timespan in the past
       # Time strings like 2h (2 hours), 5m (5 minutes) can be used.
       #ignore_older: 10m
       <% if @ignore_older %>ignore_older: <%= @ignore_older%><% end %> 
 
-      
-      
       # Type to be published in the 'type' field. For Elasticsearch output,
       # the type defines the document type these entries should be stored
       # in. Default: log
       #document_type: log
       <% if @document_type %>document_type: <%= @document_type%><% end %> 
-
 
       # Scan frequency in seconds.
       # How often these files should be checked for changes. In case it is set
@@ -72,19 +68,16 @@
       #scan_frequency: 10s
       <% if @scan_frequency %>scan_frequency: <%= @scan_frequency%><% end %> 
       
-
       # Defines the buffer size every harvester uses when fetching the file
       #harvester_buffer_size: 16384
       <% if @harvester_buffer_size %>harvester_buffer_size: <%= @harvester_buffer_size%><% end %> 
       
-
       # Setting tail_files to true means filebeat starts readding new files at the end
       # instead of the beginning. If this is used in combination with log rotation
       # this can mean that the first entries of a new file are skipped.
       #tail_files: false
       <% if @tail_files %>tail_files: <%= @tail_files%><% end %> 
       
-
       # Backoff values define how agressively filebeat crawls new files for updates
       # The default values can be used in most cases. Backoff defines how long it is waited
       # to check a file again after EOF is reached. Default is 1s which means the file
@@ -93,14 +86,12 @@
       #backoff: 1s
       <% if @backoff %>backoff: <%= @backoff%><% end %> 
 
-      
       # Max backoff defines what the maximum backoff time is. After having backed off multiple times
       # from checking the files, the waiting time will never exceed max_backoff idenependent of the
       # backoff factor. Having it set to 10s means in the worst case a new line can be added to a log
       # file after having backed off multiple times, it takes a maximum of 10s to read the new line
       #max_backoff: 10s
       <% if @max_backoff %>max_backoff: <%= @max_backoff%><% end %> 
-      
 
       # The backoff factor defines how fast the algorithm backs off. The bigger the backoff factor,
       # the faster the max_backoff value is reached. If this value is set to 1, no backoff will happen.
@@ -114,7 +105,6 @@
       # In case the line is not completed in this time, the line will be skipped.
       #partial_line_waiting: 5s
       <% if @partial_line_waiting %>partial_line_waiting: <%= @partial_line_waiting%><% end %> 
-      
 
       # This option closes a file on windows, as soon as the file name changes.
       # This config option is windows only. Filebeat keeps the files it's reading open. This can cause
